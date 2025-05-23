@@ -2,6 +2,9 @@
   "name": "simple_gambling_machine_frontend",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18.18.0" // You can also use a specific version like "18.18.0" or "20.11.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
