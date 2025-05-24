@@ -14,13 +14,17 @@ import ClaimButton from "@/components/ClaimButton";
 
 // Updated MainVisualDisplay (no title, no outer frame)
 function MainVisualDisplay({ imageName, altText = "Main visual content" }) {
-  const imagePath = `/${imageName}`;
+  // MODIFIED LINE: Remove the leading slash to make it a relative path
+  // from the perspective of index.html in the 'out' directory.
+  const imagePath = imageName; 
+  // If imageName is "SGM0.png", imagePath will be "SGM0.png"
+
   return (
-    <div className="w-full h-full flex flex-col overflow-hidden"> {/* Takes full space from parent */}
-      {/* Title h3 REMOVED */}
+    <div className="w-full h-full flex flex-col overflow-hidden"> 
+      {/* Title h3 REMOVED as per your previous request */}
       <div className="relative flex-1 w-full min-h-0">
         <img
-          src={imagePath}
+          src={imagePath} // Use the updated, relative imagePath
           alt={altText}
           className="absolute top-0 left-0 w-full h-full object-contain"
           onError={(e) => {
@@ -29,6 +33,8 @@ function MainVisualDisplay({ imageName, altText = "Main visual content" }) {
             if (parent) {
               const errorMsg = parent.querySelector('.img-error-msg');
               if (errorMsg) errorMsg.style.display = 'flex';
+              // For debugging, you could add:
+              // console.error("Image failed to load:", imagePath); 
             }
           }}
         />
