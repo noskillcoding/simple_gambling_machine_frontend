@@ -5,7 +5,7 @@ import "./globals.css";
 // const inter = Inter({ subsets: ["latin"] }); // <--- REMOVE or COMMENT OUT this line
 
 export const metadata = {
-  title: "Simple Gambling Machine dApp",
+  title: "Simple Gambling Machine",
   description: "A decentralized gambling machine on Ethereum.",
 };
 

@@ -4,8 +4,7 @@ const nextConfig = {
     images: {
       unoptimized: true,
     },
-    // Add this line:
-    assetPrefix: './', // This tells Next.js to use relative paths for assets
+    assetPrefix: './', 
   };
   
   export default nextConfig;
