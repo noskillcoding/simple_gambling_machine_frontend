@@ -155,21 +155,21 @@ export default function WalletInfo({ onConnectionStateChange }) {
   if (account) {
     statusContent = ( 
       <>
-        <p className="mb-[0.2vh] font-medium truncate" title={account}>
+        <p className="mb-[0.2vh] font-medium truncate dark:text-slate-200" title={account}>
           {`${account.substring(0, 5)}...${account.substring(account.length - 4)}`}
         </p>
         {isOnSepolia ? (
-          <p className="mb-[0.5vh] text-gray-700">
+          <p className="mb-[0.5vh] text-gray-700 dark:text-slate-300">
             {balance ? `${parseFloat(balance).toFixed(3)} ETH` : "Loading..."} <span className="text-xs">({networkName || 'Sepolia'})</span>
           </p>
         ) : (
-          <p className="mb-[0.5vh] text-red-600 font-semibold">
+          <p className="mb-[0.5vh] text-red-600 dark:text-red-400 font-semibold">
              On {networkName || 'Unknown Network'}
           </p>
         )}
         <button
           onClick={disconnectWalletHandler}
-          className="w-full px-[1vw] py-[0.4vh] text-[1.1vh] md:text-[1.3vh] bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50 transition-colors text-center"
+          className="w-full px-[1vw] py-[0.4vh] text-[1.1vh] md:text-[1.3vh] bg-red-500 dark:bg-red-600 text-white dark:text-gray-100 rounded hover:bg-red-600 dark:hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 dark:focus:ring-red-500 focus:ring-opacity-50 transition-colors text-center"
         >
           Disconnect
         </button>
@@ -179,7 +179,7 @@ export default function WalletInfo({ onConnectionStateChange }) {
     statusContent = (
       <button
         onClick={connectWalletHandler}
-        className="px-[1.5vh] py-[0.75vh] md:px-[1.2vh] md:py-[0.6vh] bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 transition-colors shadow-sm"
+        className="px-[1.5vh] py-[0.75vh] md:px-[1.2vh] md:py-[0.6vh] bg-blue-500 dark:bg-blue-600 text-white dark:text-gray-100 rounded hover:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-500 focus:ring-opacity-50 transition-colors shadow-sm"
       >
         Connect Wallet
       </button>
@@ -187,15 +187,15 @@ export default function WalletInfo({ onConnectionStateChange }) {
   }
 
   return (
-    <div className="p-[0.5vh] md:p-[0.8vh] border border-gray-300 rounded-md bg-white/80 backdrop-blur-sm shadow-md text-[1.2vh] md:text-[1.4vh] whitespace-nowrap min-w-[150px] md:min-w-[180px] max-w-[180px] md:max-w-[220px]">
+    <div className="p-[0.5vh] md:p-[0.8vh] border border-gray-300 dark:border-gray-700 rounded-md bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-md text-[1.2vh] md:text-[1.4vh] whitespace-nowrap min-w-[150px] md:min-w-[180px] max-w-[180px] md:max-w-[220px]">
       {statusContent}
       {!isOnSepolia && account && (
-        <p className="mt-[0.5vh] text-[1.1vh] font-semibold text-red-700 bg-red-100 p-[0.5vh] rounded">
+        <p className="mt-[0.5vh] text-[1.1vh] font-semibold text-red-700 dark:text-red-300 bg-red-100 dark:bg-red-900/50 p-[0.5vh] rounded">
             Switch to Sepolia!
         </p>
       )}
       {errorMessage && ( // General error messages, not related to wrong network if already handled by isOnSepolia
-         <p className={`mt-[0.5vh] text-[1vh] ${errorMessage.toLowerCase().includes("network") && !isOnSepolia ? "hidden" : "text-red-600"} truncate`} title={errorMessage}>{errorMessage}</p>
+         <p className={`mt-[0.5vh] text-[1vh] ${errorMessage.toLowerCase().includes("network") && !isOnSepolia ? "hidden" : "text-red-600 dark:text-red-400"} truncate`} title={errorMessage}>{errorMessage}</p>
       )}
     </div>
   );

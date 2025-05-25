@@ -1,10 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background-rgb: 255, 255, 255; /* White */
+  --foreground-rgb: 23, 23, 23;   /* Neutral 900 from Tailwind */
+
+  /* Keep existing theme variables if they are used by Tailwind's @theme inline */
+  --background: rgb(var(--background-rgb));
+  --foreground: rgb(var(--foreground-rgb));
 }
 
+html.dark {
+  --background-rgb: 23, 23, 23;   /* Neutral 900 for dark background */
+  --foreground-rgb: 245, 245, 245; /* Neutral 100 for dark text */
+
+  /* Update existing theme variables for dark mode */
+  --background: rgb(var(--background-rgb));
+  --foreground: rgb(var(--foreground-rgb));
+}
+
+/* This @theme block might be from a library or custom setup, review its variables */
+/* If it's directly using --background and --foreground, it should adapt automatically */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -12,15 +27,9 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Use the RGB versions for consistency */
+  background: rgb(var(--background-rgb));
+  color: rgb(var(--foreground-rgb));
+  font-family: Arial, Helvetica, sans-serif; /* Keep existing font */
 }

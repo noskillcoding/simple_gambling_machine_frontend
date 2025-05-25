@@ -6,6 +6,7 @@ import { ethers } from 'ethers';
 import { contractAddress, contractABI } from '@/config/contractDetails';
 
 import WalletInfo from "@/components/WalletInfo";
+import ThemeSwitcher from '../components/ThemeSwitcher';
 import ParticipateButton from "@/components/ParticipateButton";
 import DataDisplayCard from "@/components/DataDisplayCard";
 import FAQ from "@/components/FAQ";
@@ -22,7 +23,7 @@ function MainVisualDisplay({ imageName, altText = "Main visual content" }) {
       <div className="relative flex-1 w-full min-h-0">
         <img src={imagePath} alt={altText} className="absolute top-0 left-0 w-full h-full object-contain"
              onError={(e) => { e.target.style.display = 'none'; const p = e.target.parentElement?.querySelector('.img-error-msg'); if(p) p.style.display='flex';}}/>
-        <div className="img-error-msg absolute inset-0 hidden items-center justify-center text-gray-500 text-[1.1vh] sm:text-[1.3vh] p-[0.5vh]">Image not found: {imagePath}</div>
+        <div className="img-error-msg absolute inset-0 hidden items-center justify-center text-gray-500 dark:text-gray-400 text-[1.1vh] sm:text-[1.3vh] p-[0.5vh]">Image not found: {imagePath}</div>
       </div>
     </div>
   );
@@ -32,9 +33,9 @@ function MainVisualDisplay({ imageName, altText = "Main visual content" }) {
 function SchemeImageDisplay({ imageName = "SGM_Table.png", title = "Deposits Structure", altText = "Table explaining deposit structure" }) {
   const imagePath = imageName; // Use relative path, assuming image is in /public
   return (
-    <div className="bg-white rounded-md text-center flex flex-col flex-shrink-0 h-full w-full overflow-hidden p-[0.5vh]">
+    <div className="bg-white dark:bg-slate-800 rounded-md text-center flex flex-col flex-shrink-0 h-full w-full overflow-hidden p-[0.5vh]">
       {title && ( // Conditionally render title
-        <h3 className="text-[1.3vh] sm:text-[3.5vh] font-semibold pt-[0.5vh] mb-[0.5vh] text-gray-700 shrink-0 truncate">
+        <h3 className="text-[1.3vh] sm:text-[3.5vh] font-semibold pt-[0.5vh] mb-[0.5vh] text-gray-700 dark:text-slate-200 shrink-0 truncate">
           {title}
         </h3>
       )}
@@ -53,7 +54,7 @@ function SchemeImageDisplay({ imageName = "SGM_Table.png", title = "Deposits Str
           }}
         />
         <div 
-          className="img-error-msg absolute inset-0 hidden items-center justify-center text-gray-500 text-[1.1vh] sm:text-[1.3vh] p-[0.5vh] bg-gray-100"
+          className="img-error-msg absolute inset-0 hidden items-center justify-center text-gray-500 dark:text-gray-400 text-[1.1vh] sm:text-[1.3vh] p-[0.5vh] bg-gray-100 dark:bg-slate-700"
         >
           Image not found: {imagePath}
         </div>
@@ -183,25 +184,26 @@ export default function HomePage() {
   const pageStyle = { fontSize: 'clamp(5px, 1.4vh, 15px)' }; // Adjusted min font size from your code
 
   return (
-    <div className="h-screen w-screen bg-white flex flex-col overflow-hidden" style={pageStyle} title={yourDAppName}>
+    <div className="h-screen w-screen bg-white dark:bg-slate-900 flex flex-col overflow-hidden" style={pageStyle} title={yourDAppName}>
       
-      <header className="relative p-[1vh] text-center border-b border-gray-200 shadow-sm shrink-0 h-[10vh] flex items-center justify-center bg-white">
+      <header className="relative p-[1vh] text-center border-b border-gray-200 dark:border-gray-700 shadow-sm shrink-0 h-[10vh] flex items-center justify-center bg-white dark:bg-slate-800">
         {/* Using your larger title font size */}
-        <h1 className="text-[6.5vh] sm:text-[7vh] font-extrabold text-gray-800 leading-tight truncate w-full px-[20vw] sm:px-[18vw] md:px-[15vw]">
+        <h1 className="text-[6.5vh] sm:text-[7vh] font-extrabold text-gray-800 dark:text-slate-100 leading-tight truncate w-full px-[20vw] sm:px-[18vw] md:px-[15vw]">
           Simple Gambling Machine
         </h1>
-        <div className="absolute top-1/2 -translate-y-1/2 right-[1vh] md:right-[1.5vh] z-10">
+        <div className="absolute top-1/2 -translate-y-1/2 right-[1vh] md:right-[1.5vh] z-10 flex items-center space-x-2">
+          <ThemeSwitcher />
           <WalletInfo onConnectionStateChange={handleWalletStateChange} /> 
         </div>
       </header>
 
       {dataErrorMessage && (
-        <p className="text-center text-red-500 py-[0.5vh] px-[1vw] shrink-0 text-[1.3vh] sm:text-[1.4vh] truncate bg-white">
+        <p className="text-center text-red-500 dark:text-red-400 py-[0.5vh] px-[1vw] shrink-0 text-[1.3vh] sm:text-[1.4vh] truncate bg-white dark:bg-slate-800">
           {dataErrorMessage}
         </p>
       )}
 
-      <div className="flex-1 flex flex-col md:flex-row md:space-x-[0.5vw] overflow-hidden p-[0.5vh] min-h-0 bg-white">
+      <div className="flex-1 flex flex-col md:flex-row md:space-x-[0.5vw] overflow-hidden p-[0.5vh] min-h-0 bg-white dark:bg-slate-900">
         <div className="md:w-3/5 h-full flex flex-col space-y-[0.5vh] overflow-hidden p-[0.5vh]">
           <div className="shrink-0 h-[45vh]"> {/* User's specified height for main visual */}
             <MainVisualDisplay imageName="SGM0.png" altText="Image is not here" />
@@ -213,7 +215,7 @@ export default function HomePage() {
               <DataDisplayCard label="Required Deposit" value={isLoadingData ? "Loading..." : (requiredDepositEth !== null ? requiredDepositEth.toFixed(8) : "N/A")} unit="ETH" />
               <DataDisplayCard 
                 label="Last Depositor"
-                value={isLoadingData ? "Loading..." : (lastDepositorAddress ? (<a href={`https://sepolia.etherscan.io/address/${lastDepositorAddress}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 hover:underline break-all" title={`View on Etherscan: ${lastDepositorAddress}`}>{lastDepositorAddress}</a>) : "N/A")}
+                value={isLoadingData ? "Loading..." : (lastDepositorAddress ? (<a href={`https://sepolia.etherscan.io/address/${lastDepositorAddress}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline break-all" title={`View on Etherscan: ${lastDepositorAddress}`}>{lastDepositorAddress}</a>) : "N/A")}
               />
             </div>
             <div className="sm:w-1/2 h-full flex flex-col space-y-[0.5vh] p-[0.5vh] overflow-hidden"> {/* right1 */}
@@ -222,7 +224,7 @@ export default function HomePage() {
               <DataDisplayCard label="Total Deposits" value={isLoadingData ? "Loading..." : (depositCount !== null ? depositCount : "N/A")} />
               <DataDisplayCard
                 label="Source Code"
-                value={yourGitHubRepoUrl ? (<a href={yourGitHubRepoUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 hover:underline break-all" title="View source code on GitHub">{yourGitHubRepoUrl}</a>) : "N/A"}
+                value={yourGitHubRepoUrl ? (<a href={yourGitHubRepoUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline break-all" title="View source code on GitHub">{yourGitHubRepoUrl}</a>) : "N/A"}
               />
             </div>
           </div>
@@ -234,12 +236,13 @@ export default function HomePage() {
           {/* FAQ Wrapper - Now on top. */}
           {/* It uses flex-1 to take available space primarily, allowing SchemeImageDisplay to be pushed down if FAQ is very short */}
           {/* OR, if FAQ has lots of content, its internal scroll will activate. */}
-          <div className="flex-1 overflow-hidden min-h-0 p-[0.5vh] rounded-md bg-white flex flex-col"> 
+          <div className="flex-1 overflow-hidden min-h-0 p-[0.5vh] rounded-md bg-white dark:bg-slate-800 flex flex-col"> 
             <FAQ /> {/* Ensure FAQ.js itself has appropriate max-height and overflow-y-auto if its content is long */}
           </div>
 
           {/* Scheme Image Container - Now below FAQ, with a defined height. */}
-          <div className="shrink-0 h-[25vh] sm:h-[28vh] rounded-md overflow-hidden bg-white"> {/* Adjust vh height as needed for your image */}
+          {/* The SchemeImageDisplay component itself handles its dark mode bg */}
+          <div className="shrink-0 h-[25vh] sm:h-[28vh] rounded-md overflow-hidden bg-white dark:bg-slate-800"> {/* Adjust vh height as needed for your image */}
              <SchemeImageDisplay 
                imageName="SGM_Table.png" 
                title="Deposits Structure" 
@@ -249,11 +252,11 @@ export default function HomePage() {
         </div>
       </div>
       
-      <div className="text-center py-[0.5vh] md:py-[1vh] border-t border-gray-200 shrink-0 h-[7vh] flex items-center justify-center bg-white">
+      <div className="text-center py-[0.5vh] md:py-[1vh] border-t border-gray-200 dark:border-gray-700 shrink-0 h-[7vh] flex items-center justify-center bg-white dark:bg-slate-800">
           <button
               onClick={fetchContractUIData}
               disabled={isLoadingData} 
-              className="px-[1.5vw] py-[0.75vh] text-[1.3vh] sm:text-[1.5vh] bg-gray-600 text-white rounded hover:bg-gray-700 disabled:bg-gray-300"
+              className="px-[1.5vw] py-[0.75vh] text-[1.3vh] sm:text-[1.5vh] bg-gray-600 dark:bg-gray-700 text-white dark:text-gray-200 rounded hover:bg-gray-700 dark:hover:bg-gray-600 disabled:bg-gray-300 dark:disabled:bg-gray-500"
           >
               {isLoadingData ? "Refreshing..." : "Refresh Contract Data"}
           </button>

@@ -104,7 +104,7 @@ export default function ClaimButton({
         <button
           onClick={handleClaim}
           disabled={buttonDisabled}
-          className={`w-full ${padding} bg-orange-500 text-white ${textSize} font-semibold rounded-md hover:bg-orange-600 shadow-sm disabled:bg-gray-400 disabled:cursor-not-allowed truncate transition-colors duration-300 ease-in-out`}
+          className={`w-full ${padding} bg-orange-500 dark:bg-orange-600 text-white dark:text-gray-100 ${textSize} font-semibold rounded-md hover:bg-orange-600 dark:hover:bg-orange-700 shadow-sm disabled:bg-gray-400 dark:disabled:bg-gray-500 disabled:cursor-not-allowed truncate transition-colors duration-300 ease-in-out`}
         >
           {buttonTextContent}
         </button>
@@ -113,14 +113,14 @@ export default function ClaimButton({
       {/* Simple Modal Implementation (same structure as in ParticipateButton) */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-[2vw]"> {/* Slightly darker backdrop */}
-          <div className={`p-[2vh] md:p-[3vh] bg-white rounded-lg shadow-xl text-center max-w-[90vw] md:max-w-[50vw] text-[1.5vh] md:text-[1.8vh]`}>
-            <h3 className={`text-[2vh] md:text-[2.5vh] font-bold mb-[1.5vh] ${modalType === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+          <div className={`p-[2vh] md:p-[3vh] bg-white dark:bg-slate-800 rounded-lg shadow-xl text-center max-w-[90vw] md:max-w-[50vw] text-[1.5vh] md:text-[1.8vh]`}>
+            <h3 className={`text-[2vh] md:text-[2.5vh] font-bold mb-[1.5vh] ${modalType === 'success' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
               {modalType === 'success' ? 'Claim Successful' : (modalType === 'error' ? 'Claim Failed' : 'Notice')}
             </h3>
-            <p className="mb-[2vh] text-gray-700 break-words">{modalMessage}</p>
+            <p className="mb-[2vh] text-gray-700 dark:text-slate-300 break-words">{modalMessage}</p>
             <button
               onClick={() => setShowModal(false)}
-              className={`px-[2vw] py-[1vh] text-[1.5vh] md:text-[1.7vh] rounded-md text-white ${modalType === 'success' ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-500 hover:bg-gray-600'}`}
+              className={`px-[2vw] py-[1vh] text-[1.5vh] md:text-[1.7vh] rounded-md text-white dark:text-gray-100 ${modalType === 'success' ? 'bg-blue-500 dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-700' : 'bg-gray-500 dark:bg-gray-600 hover:bg-gray-600 dark:hover:bg-gray-700'}`}
             >
               Close
             </button>

@@ -39,15 +39,15 @@ export default function FAQ() {
     // Removed border, shadow, my-6. Adjusted padding to use vh.
     // Added overflow-y-auto here if FAQ content is long and its parent has overflow-hidden.
     // This ensures the FAQ content itself can scroll if it's too long for the space allocated to it by page.js
-    <div className="p-[1vh] bg-white max-h-[50vh] overflow-y-auto"> 
-      <h2 className="text-[1.8vh] sm:text-[4vh] font-bold mb-[1.5vh] text-center text-gray-700">
+    <div className="p-[1vh] bg-white dark:bg-slate-800 max-h-[50vh] overflow-y-auto"> 
+      <h2 className="text-[1.8vh] sm:text-[4vh] font-bold mb-[1.5vh] text-center text-gray-700 dark:text-slate-200">
         WTF IS THIS GAME
       </h2>
       <div className="space-y-[1vh]">
         {faqItems.map((item, index) => (
           <div key={index}>
-            <h3 className="text-[1.3vh] sm:text-[1.5vh] font-semibold text-gray-800">{item.question}</h3>
-            <p className="text-gray-600 text-[1.2vh] sm:text-[1.4vh]">{item.answer}</p>
+            <h3 className="text-[1.3vh] sm:text-[1.5vh] font-semibold text-gray-800 dark:text-slate-100">{item.question}</h3>
+            <p className="text-gray-600 dark:text-slate-300 text-[1.2vh] sm:text-[1.4vh]">{item.answer}</p>
           </div>
         ))}
       </div>

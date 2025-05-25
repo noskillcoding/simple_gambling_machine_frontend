@@ -19,17 +19,17 @@ export default function DataDisplayCard({ label, value, unit = "", prominent = f
 
   return (
     <div 
-      className={`${containerPadding} border border-gray-300 rounded-md bg-white shadow-sm flex flex-col justify-center flex-shrink min-h-0`}
+      className={`${containerPadding} border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-slate-800 shadow-sm flex flex-col justify-center flex-shrink min-h-0`}
     >
       <h3 
-        className={`${labelSize} ${labelMarginBottom} font-medium text-gray-600 truncate`} // Label can still truncate
+        className={`${labelSize} ${labelMarginBottom} font-medium text-gray-600 dark:text-slate-300 truncate`} // Label can still truncate
       >
         {label}
       </h3>
       {/* Removed 'truncate' from the value paragraph to allow wrapping for full addresses */}
       {/* Added 'break-all' to help long strings (like addresses) wrap aggressively */}
       <p 
-        className={`${valueSize} font-semibold text-gray-800 break-all`} 
+        className={`${valueSize} font-semibold text-gray-800 dark:text-slate-100 break-all`} 
       >
         {valueContent}
       </p>
