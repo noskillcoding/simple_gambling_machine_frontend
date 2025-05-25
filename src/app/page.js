@@ -12,7 +12,7 @@ import FAQ from "@/components/FAQ";
 import ClaimButton from "@/components/ClaimButton";
 
 // --- YOUR SEPOLIA RPC URL ---
-const SEPOLIA_RPC_URL = "https://eth-sepolia.g.alchemy.com/v2/QWdawN-TQ8-4f4OQGMIRp"; // Your actual URL
+const SEPOLIA_RPC_URL = "https://eth-sepolia.g.alchemy.com/v2/uXLpN9T40idmtfAh4i4s8"; // Your actual URL
 
 // --- Image Components ---
 function MainVisualDisplay({ imageName, altText = "Main visual content" }) {
