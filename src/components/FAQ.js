@@ -22,6 +22,10 @@ export default function FAQ() {
       answer: "Yes, it’s fully on-chain and immutable. 1. deployed at 0xYourOfficialVerifiedAddress on Ethereum mainnet. 2.verified source code on Etherscan: [link]. 3. frontend is open-source: [GitHub link]. 4. hosted on IPFS at: [link].eth. 5.always check the contract address in your wallet before confirming any transaction."
     },
     {
+      question: "Casino wins as always, right?",
+      answer: "No. Only depositors win — 1% of each deposit is sent as a donation to [___]."
+    },
+    {
       question: "Is the smart contract audited?",
       answer: "No. Use at your own risk. The code is pretty simple though, go to GitHub/Etherscan, copy it and send to your favourite LLM to check it."
     },
