@@ -3,7 +3,7 @@ export default function FAQ() {
   const faqItems = [
     {
       question: "What is it about?",
-      answer: "A decentralized game: deposit a small % of the pot, and if no one deposits after you — you win big. And 5 randoms win little. Check the structure below",
+      answer: "A decentralized game: deposit a small % of the pot, and if no one deposits after you — you win big. And 5 randoms win little.",
     },
     {
       question: "How to gamble?",
@@ -15,23 +15,27 @@ export default function FAQ() {
     },
     {
       question: "When will the game end?",
-      answer: "When no new deposit is made before the timer expires, anyone can hit Claim to end the game — the last depositor gets 80% of the pot, 5 others get 2% each. The timer shortens as more deposits are made."
+      answer: "When no new deposit is made before the timer expires, anyone can hit Claim to end the game. The timer shortens as more deposits are made. Check the structure below."
     },
     {
       question: "Is it safe?",
-      answer: "Yes, it’s fully on-chain and immutable. 1. deployed at 0xYourOfficialVerifiedAddress on Ethereum mainnet. 2.verified source code on Etherscan: [link]. 3. frontend is open-source: [GitHub link]. 4. hosted on IPFS at: [link].eth. 5.always check the contract address in your wallet before confirming any transaction."
+      answer: "Yes, it’s fully on-chain and immutable. 1. deployed at 0xYourOfficialVerifiedAddress on Ethereum mainnet. 2.verified source code on Etherscan: [link]. 3. frontend is open-source: https://github.com/noskillcoding/simple_gambling_machine_frontend. 4. hosted on IPFS at: [link].eth. 5.always check the contract address in your wallet before confirming any transaction."
     },
     {
       question: "Casino wins as always, right?",
-      answer: "No. Only depositors win — 1% of each deposit is sent as a donation to [___]."
+      answer: "No. Only depositors win. No fees."
     },
     {
       question: "Is the smart contract audited?",
       answer: "No. Use at your own risk. The code is pretty simple though, go to GitHub/Etherscan, copy it and send to your favourite LLM to check it."
     },
     {
+      question: "No vulnerabilities, right?",
+      answer: "Not quite. Randomness isn’t truly random on-chain. It’s possible to influence the outcome when claiming if you’re advanced. But it’s tricky — and everybody will know you’re a hacker."
+    },
+    {
       question: "Why is the frontend so shitty?",
-      answer: "I focused on the game, not the looks. Contributions welcome — [GitHub link]."
+      answer: "Just because. Contributions welcome — https://github.com/noskillcoding/simple_gambling_machine_frontend."
     },
   ];
 
