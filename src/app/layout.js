@@ -1,18 +1,20 @@
 // src/app/layout.js
-// import { Inter } from 'next/font/google'; // <--- REMOVE or COMMENT OUT this line
 import "./globals.css";
-
-// const inter = Inter({ subsets: ["latin"] }); // <--- REMOVE or COMMENT OUT this line
 
 export const metadata = {
   title: "Simple Gambling Machine",
   description: "A decentralized gambling machine on Ethereum.",
+  // NO 'icons' field here
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      {/* Remove inter.className from here: */}
+      <head>
+        {/* Manually add the relative link */}
+        <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+      </head>
       <body> 
         {children}
       </body>

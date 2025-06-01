@@ -11,7 +11,7 @@ export default function FAQ() {
     },
     {
       question: "How can I win?",
-      answer: "Be the last depositor before the countdown hits zero. You get 80% of the pot. 5 others (randomly selected) win 2% each."
+      answer: "Be the last depositor before the countdown hits zero. You get 80% of the pot. 5 others (randomly selected) win 2% each. 10% is reserved for the next round."
     },
     {
       question: "When will the game end?",
@@ -19,7 +19,7 @@ export default function FAQ() {
     },
     {
       question: "Is it safe?",
-      answer: "Yes, it’s fully on-chain and immutable. 1. deployed at 0xYourOfficialVerifiedAddress on Ethereum mainnet. 2.verified source code on Etherscan: [link]. 3. frontend is open-source: https://github.com/noskillcoding/simple_gambling_machine_frontend. 4. hosted on IPFS at: [link].eth. 5.always check the contract address in your wallet before confirming any transaction."
+      answer: "Yes, it’s fully on-chain and immutable (no admin keys, multisig control, etc.). 1. Deployed at 0xYourOfficialVerifiedAddress on Ethereum mainnet. 2. Verified source code on Etherscan: [link]. 3. Frontend is open-source: https://github.com/noskillcoding/simple_gambling_machine_frontend. 4. Hosted on IPFS at: [link].eth. 5. Always check the contract address in your wallet before confirming any transaction."
     },
     {
       question: "Casino wins as always, right?",
@@ -27,7 +27,7 @@ export default function FAQ() {
     },
     {
       question: "Is the smart contract audited?",
-      answer: "No. Use at your own risk. The code is pretty simple though, go to GitHub/Etherscan, copy it and send to your favourite LLM to check it."
+      answer: "No. Use at your own risk. The code is pretty simple though, you can find it on GitHub/Etherscan LINK."
     },
     {
       question: "No vulnerabilities, right?",
@@ -35,7 +35,7 @@ export default function FAQ() {
     },
     {
       question: "Why is the frontend so shitty?",
-      answer: "Just because. Contributions welcome — https://github.com/noskillcoding/simple_gambling_machine_frontend."
+      answer: "Don’t know much about coding, check the story here LINK. Contributions welcome — https://github.com/noskillcoding/simple_gambling_machine_frontend."
     },
   ];
 
