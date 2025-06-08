@@ -19,7 +19,7 @@ export default function FAQ() {
     },
     {
       question: "Is it safe?",
-      answer: "Yes, it’s fully on-chain and immutable (no admin keys, multisig control, etc.). 1. Deployed at 0xYourOfficialVerifiedAddress on Ethereum mainnet. 2. Verified source code on Etherscan: [link]. 3. Frontend is open-source: https://github.com/noskillcoding/simple_gambling_machine_frontend. 4. Hosted on IPFS at: [link].eth. 5. Always check the contract address in your wallet before confirming any transaction."
+      answer: "Yes, it is fully on-chain and immutable (no admin keys, multisig control, etc.). 1. Deployed at 0x01567Fd0e93004B1af30a86DD590A591c8aA72FC on Ethereum mainnet. 2. Verified source code on Etherscan: https://etherscan.io/address/0x01567fd0e93004b1af30a86dd590a591c8aa72fc#code. 3. Frontend is open-source: https://github.com/noskillcoding/simple_gambling_machine_frontend. 4. Hosted on IPFS at: http://simplegamblingmachine.eth.link. 5. Always check the contract address in your wallet before confirming any transaction."
     },
     {
       question: "Casino wins as always, right?",
@@ -27,15 +27,15 @@ export default function FAQ() {
     },
     {
       question: "Is the smart contract audited?",
-      answer: "No. Use at your own risk. The code is pretty simple though, you can find it on GitHub/Etherscan LINK."
+      answer: "No. Use at your own risk. The code is pretty simple though, you can find it on https://github.com/noskillcoding/simple_gambling_machine and https://etherscan.io/address/0x01567fd0e93004b1af30a86dd590a591c8aa72fc#code"
     },
     {
       question: "No vulnerabilities, right?",
-      answer: "Not quite. Randomness isn’t truly random on-chain. It’s possible to influence the outcome when claiming if you’re advanced. But it’s tricky — and everybody will know you’re a hacker."
+      answer: "Not quite. On-chain randomness isn’t truly random. In some cases, a malicious winner can re-roll the dice until the five “random” winners are his favourable accounts. But you have to win the game first anyway, and it’s tricky and everyone will know you’re a hacker."
     },
     {
       question: "Why is the frontend so shitty?",
-      answer: "Don’t know much about coding, check the story here LINK. Contributions welcome — https://github.com/noskillcoding/simple_gambling_machine_frontend."
+      answer: "Don’t know much about coding, check the story here https://paragraph.com/@0xucs.eth/vibe-coding-simple-gambling-machine. Contributions welcome — https://github.com/noskillcoding/simple_gambling_machine_frontend."
     },
   ];
 

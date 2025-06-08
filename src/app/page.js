@@ -11,13 +11,13 @@ import DataDisplayCard from "@/components/DataDisplayCard";
 import FAQ from "@/components/FAQ";
 import ClaimButton from "@/components/ClaimButton";
 
-// --- YOUR SEPOLIA RPC URL ---
-const SEPOLIA_RPC_URL = "https://eth-sepolia.g.alchemy.com/v2/HAzgfvSZmsyzddVc7nKwX"; // Your actual URL
+// --- Mainnet RPC URL ---
+const MAINNET_RPC_URL = "https://eth-mainnet.g.alchemy.com/v2/DCusAHuxtTcqVRcUAhGvv"; // Using a Mainnet RPC URL
 
 // --- Image Components ---
 function MainVisualDisplay({ imageName, altText = "Main visual content" }) {
-  const imagePath = imageName; 
-  return ( 
+  const imagePath = imageName;
+  return (
     <div className="w-full h-full flex flex-col overflow-hidden">
       <div className="relative flex-1 w-full min-h-0">
         <img src={imagePath} alt={altText} className="absolute top-0 left-0 w-full h-full object-contain"
@@ -28,21 +28,20 @@ function MainVisualDisplay({ imageName, altText = "Main visual content" }) {
   );
 }
 
-// MODIFIED: SchemeImagePlaceholder becomes SchemeImageDisplay
 function SchemeImageDisplay({ imageName = "SGM_Table.png", title = "Deposits Structure", altText = "Table explaining deposit structure" }) {
-  const imagePath = imageName; // Use relative path, assuming image is in /public
+  const imagePath = imageName;
   return (
     <div className="bg-white rounded-md text-center flex flex-col flex-shrink-0 h-full w-full overflow-hidden p-[0.5vh]">
-      {title && ( // Conditionally render title
+      {title && (
         <h3 className="text-[1.3vh] sm:text-[3.5vh] font-semibold pt-[0.5vh] mb-[0.5vh] text-gray-700 shrink-0 truncate">
           {title}
         </h3>
       )}
-      <div className="relative flex-1 w-full min-h-0 rounded-b-md overflow-hidden"> {/* Image container */}
+      <div className="relative flex-1 w-full min-h-0 rounded-b-md overflow-hidden">
         <img
           src={imagePath}
           alt={altText}
-          className="absolute top-0 left-0 w-full h-full object-contain" // Fills container, maintains aspect ratio
+          className="absolute top-0 left-0 w-full h-full object-contain"
           onError={(e) => {
             e.target.style.display = 'none';
             const parent = e.target.parentElement;
@@ -52,7 +51,7 @@ function SchemeImageDisplay({ imageName = "SGM_Table.png", title = "Deposits Str
             }
           }}
         />
-        <div 
+        <div
           className="img-error-msg absolute inset-0 hidden items-center justify-center text-gray-500 text-[1.1vh] sm:text-[1.3vh] p-[0.5vh] bg-gray-100"
         >
           Image not found: {imagePath}
@@ -64,17 +63,16 @@ function SchemeImageDisplay({ imageName = "SGM_Table.png", title = "Deposits Str
 
 
 export default function HomePage() {
-  const yourGitHubRepoUrl = "https://github.com/noskillcoding/simple_gambling_machine"; 
-  const yourDAppName = "Simple Gambling Machine"; 
+  const yourGitHubRepoUrl = "https://github.com/noskillcoding/simple_gambling_machine";
+  const yourDAppName = "Simple Gambling Machine";
 
-  // --- State Variables, fetchContractUIData, useEffects, Helper Functions (These remain unchanged from your version) ---
   const [contractEthBalance, setContractEthBalance] = useState(null);
   const [depositCount, setDepositCount] = useState(null);
   const [requiredDepositEth, setRequiredDepositEth] = useState(null);
   const [isLoadingData, setIsLoadingData] = useState(true);
   const [dataErrorMessage, setDataErrorMessage] = useState("");
   const [isWalletConnected, setIsWalletConnected] = useState(false);
-  const [isCorrectNetwork, setIsCorrectNetwork] = useState(false); 
+  const [isCorrectNetwork, setIsCorrectNetwork] = useState(false);
   const [lastDepositorAddress, setLastDepositorAddress] = useState(null);
   const [lastDepositTimestamp, setLastDepositTimestamp] = useState(null);
   const [currentTimeoutPeriodSeconds, setCurrentTimeoutPeriodSeconds] = useState(null);
@@ -82,14 +80,14 @@ export default function HomePage() {
 
   const fetchContractUIData = useCallback(async () => {
     console.log("Attempting to fetch contract UI data...");
-    setIsLoadingData(true); setDataErrorMessage(""); 
+    setIsLoadingData(true); setDataErrorMessage("");
     let provider;
     if (isWalletConnected && isCorrectNetwork && window.ethereum) {
       console.log("Using MetaMask (BrowserProvider) for fetching data.");
       provider = new ethers.BrowserProvider(window.ethereum);
-    } else if (SEPOLIA_RPC_URL && SEPOLIA_RPC_URL !== "YOUR_ALCHEMY_SEPOLIA_HTTPS_RPC_URL_HERE") {
-      console.log("Using public Sepolia RPC for fetching data.");
-      provider = new ethers.JsonRpcProvider(SEPOLIA_RPC_URL);
+    } else if (MAINNET_RPC_URL) {
+      console.log("Using public Mainnet RPC for fetching data.");
+      provider = new ethers.JsonRpcProvider(MAINNET_RPC_URL);
     } else {
       console.error("No provider available. Wallet not connected or RPC URL not set.");
       setDataErrorMessage("Cannot fetch data. Connect wallet or ensure RPC is configured.");
@@ -101,7 +99,7 @@ export default function HomePage() {
     try {
       const contract = new ethers.Contract(contractAddress, contractABI, provider);
       const [
-        balanceWei, countBigInt, requiredDepositWei, 
+        balanceWei, countBigInt, requiredDepositWei,
         fetchedLastDepositor, fetchedLastDepositTime
       ] = await Promise.all([
         provider.getBalance(contractAddress), contract.depositCount(),
@@ -125,73 +123,71 @@ export default function HomePage() {
       }
       setCurrentTimeoutPeriodSeconds(calculatedTimeoutPeriod);
       console.log("Data fetch complete.");
-    } catch (error) { 
-      console.error("Fetch Error in page.js:", error); 
-      setDataErrorMessage("Could not fetch contract data. Refresh or check console."); 
+    } catch (error) {
+      console.error("Fetch Error in page.js:", error);
+      setDataErrorMessage("Could not fetch contract data. Refresh or check console.");
       setContractEthBalance(null); setDepositCount(null); setRequiredDepositEth(0);
-    } 
+    }
     finally { setIsLoadingData(false); }
   }, [isWalletConnected, isCorrectNetwork]);
 
   const handleWalletStateChange = useCallback((walletState) => {
     console.log("HomePage received wallet state change:", walletState);
-    const previouslyConnected = isWalletConnected; // Not strictly needed anymore here
     setIsWalletConnected(walletState.connected);
-    setIsCorrectNetwork(walletState.onSepolia);
-    if (walletState.connected && walletState.onSepolia) {
-      setDataErrorMessage(""); 
-      fetchContractUIData(); 
+    setIsCorrectNetwork(walletState.onMainnet); // Use onMainnet from WalletInfo
+    if (walletState.connected && walletState.onMainnet) {
+      setDataErrorMessage("");
+      fetchContractUIData();
     } else {
       setContractEthBalance(null); setDepositCount(null); setRequiredDepositEth(null);
-      setLastDepositorAddress(null); setLastDepositTimestamp(null); 
+      setLastDepositorAddress(null); setLastDepositTimestamp(null);
       setCurrentTimeoutPeriodSeconds(null); setTimeLeft(null);
-      setIsLoadingData(false); 
-      if (!walletState.connected && !(walletState.initialCheckFailed /* This prop isn't passed from current WalletInfo */)) { 
+      setIsLoadingData(false);
+      if (!walletState.connected) {
         setDataErrorMessage("Please connect your wallet to interact.");
-      } else if (!walletState.onSepolia) {
-        setDataErrorMessage(`Wrong Network. Switch to Sepolia. (On ${walletState.networkName || 'unknown'})`);
+      } else if (!walletState.onMainnet) {
+        setDataErrorMessage(`Wrong Network. Switch to Mainnet. (On ${walletState.networkName || 'unknown'})`);
       }
     }
-  }, [fetchContractUIData, isWalletConnected]); // Added isWalletConnected to deps for previouslyConnected
+  }, [fetchContractUIData]);
 
   useEffect(() => {
-    if ((isWalletConnected && isCorrectNetwork) || (!isWalletConnected && SEPOLIA_RPC_URL && SEPOLIA_RPC_URL !== "YOUR_ALCHEMY_SEPOLIA_HTTPS_RPC_URL_HERE")) {
+    if ((isWalletConnected && isCorrectNetwork) || (!isWalletConnected && MAINNET_RPC_URL)) {
       fetchContractUIData();
-    } else if (!isWalletConnected && (!SEPOLIA_RPC_URL || SEPOLIA_RPC_URL === "YOUR_ALCHEMY_SEPOLIA_HTTPS_RPC_URL_HERE")) {
+    } else if (!isWalletConnected && !MAINNET_RPC_URL) {
         setIsLoadingData(false);
         setDataErrorMessage("Please connect wallet to view data, or configure fallback RPC.");
     }
   }, [isWalletConnected, isCorrectNetwork, fetchContractUIData]);
 
   useEffect(() => {
-    if (lastDepositTimestamp === null || currentTimeoutPeriodSeconds === null || currentTimeoutPeriodSeconds === 0 ) { // Removed wallet checks here to allow public countdown
+    if (lastDepositTimestamp === null || currentTimeoutPeriodSeconds === null || currentTimeoutPeriodSeconds === 0 ) {
         setTimeLeft(null); return;
     }
     const calculateAndSetTimeLeft = () => { const now = Math.floor(Date.now() / 1000); const end = lastDepositTimestamp + currentTimeoutPeriodSeconds; setTimeLeft(Math.max(0, end - now)); };
     calculateAndSetTimeLeft(); const id = setInterval(calculateAndSetTimeLeft, 1000);
     return () => clearInterval(id);
-  }, [lastDepositTimestamp, currentTimeoutPeriodSeconds]); // Removed wallet checks here
+  }, [lastDepositTimestamp, currentTimeoutPeriodSeconds]);
 
-  const formatTimeLeft = (s) => { 
-    if (s === null) return isLoadingData && (!isWalletConnected || !SEPOLIA_RPC_URL) ? "Loading..." : "Calculating..."; // Show calculating if public data is available
-    if (s <= 0 && lastDepositorAddress) return "Ready!"; 
-    if (s <= 0) return "N/A"; 
-    const m = Math.floor(s/60); const secs = s%60; return `${m}m ${secs<10?'0':''}${secs}s`; 
+  const formatTimeLeft = (s) => {
+    if (s === null) return isLoadingData && (!isWalletConnected || !MAINNET_RPC_URL) ? "Loading..." : "Calculating...";
+    if (s <= 0 && lastDepositorAddress) return "Ready!";
+    if (s <= 0) return "N/A";
+    const m = Math.floor(s/60); const secs = s%60; return `${m}m ${secs<10?'0':''}${secs}s`;
   };
   const isClaimable = timeLeft !== null && timeLeft <= 0 && lastDepositorAddress !== null && lastDepositorAddress !== ethers.ZeroAddress && isWalletConnected && isCorrectNetwork;
-  
-  const pageStyle = { fontSize: 'clamp(5px, 1.4vh, 15px)' }; // Adjusted min font size from your code
+
+  const pageStyle = { fontSize: 'clamp(5px, 1.4vh, 15px)' };
 
   return (
     <div className="h-screen w-screen bg-white flex flex-col overflow-hidden" style={pageStyle} title={yourDAppName}>
-      
+
       <header className="relative p-[1vh] text-center border-b border-gray-200 shadow-sm shrink-0 h-[10vh] flex items-center justify-center bg-white">
-        {/* Using your larger title font size */}
         <h1 className="text-[6.5vh] sm:text-[7vh] font-extrabold text-gray-800 leading-tight truncate w-full px-[20vw] sm:px-[18vw] md:px-[15vw]">
           Simple Gambling Machine
         </h1>
         <div className="absolute top-1/2 -translate-y-1/2 right-[1vh] md:right-[1.5vh] z-10">
-          <WalletInfo onConnectionStateChange={handleWalletStateChange} /> 
+          <WalletInfo onConnectionStateChange={handleWalletStateChange} />
         </div>
       </header>
 
@@ -203,20 +199,20 @@ export default function HomePage() {
 
       <div className="flex-1 flex flex-col md:flex-row md:space-x-[0.5vw] overflow-hidden p-[0.5vh] min-h-0 bg-white">
         <div className="md:w-3/5 h-full flex flex-col space-y-[0.5vh] overflow-hidden p-[0.5vh]">
-          <div className="shrink-0 h-[45vh]"> {/* User's specified height for main visual */}
+          <div className="shrink-0 h-[45vh]">
             <MainVisualDisplay imageName="SGM0.png" altText="Image is not here" />
           </div>
           <div className="flex-1 flex flex-col sm:flex-row sm:space-x-[0.5vw] overflow-hidden min-h-0">
-            <div className="sm:w-1/2 h-full flex flex-col space-y-[0.5vh] p-[0.5vh] overflow-hidden"> {/* left1 */}
+            <div className="sm:w-1/2 h-full flex flex-col space-y-[0.5vh] p-[0.5vh] overflow-hidden">
               <DataDisplayCard label="ETH in the Machine" value={isLoadingData ? "Loading..." : (contractEthBalance !== null ? contractEthBalance.toFixed(5) : "N/A")} unit="ETH" prominent={true} />
               <ParticipateButton requiredAmountToDepositEth={requiredDepositEth ?? 0} onParticipationSuccess={fetchContractUIData} isWalletConnected={isWalletConnected && isCorrectNetwork} prominent={true} />
               <DataDisplayCard label="Required Deposit" value={isLoadingData ? "Loading..." : (requiredDepositEth !== null ? requiredDepositEth.toFixed(8) : "N/A")} unit="ETH" />
-              <DataDisplayCard 
+              <DataDisplayCard
                 label="Last Depositor"
-                value={isLoadingData ? "Loading..." : (lastDepositorAddress ? (<a href={`https://sepolia.etherscan.io/address/${lastDepositorAddress}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 hover:underline break-all" title={`View on Etherscan: ${lastDepositorAddress}`}>{lastDepositorAddress}</a>) : "N/A")}
+                value={isLoadingData ? "Loading..." : (lastDepositorAddress ? (<a href={`https://etherscan.io/address/${lastDepositorAddress}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 hover:underline break-all" title={`View on Etherscan: ${lastDepositorAddress}`}>{lastDepositorAddress}</a>) : "N/A")}
               />
             </div>
-            <div className="sm:w-1/2 h-full flex flex-col space-y-[0.5vh] p-[0.5vh] overflow-hidden"> {/* right1 */}
+            <div className="sm:w-1/2 h-full flex flex-col space-y-[0.5vh] p-[0.5vh] overflow-hidden">
               <DataDisplayCard label="Time Left" value={formatTimeLeft(timeLeft)} prominent={true} />
               <ClaimButton isClaimable={isClaimable} isWalletConnected={isWalletConnected && isCorrectNetwork} onClaimSuccess={fetchContractUIData} prominent={true} />
               <DataDisplayCard label="Total Deposits" value={isLoadingData ? "Loading..." : (depositCount !== null ? depositCount : "N/A")} />
@@ -227,32 +223,25 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        
-        {/* Main Right Column */}
-        <div className="md:w-2/5 h-full flex flex-col space-y-[0.5vh] overflow-hidden p-[0.5vh]"> {/* Main Right - space-y provides minimal gap */}
-          
-          {/* FAQ Wrapper - Now on top. */}
-          {/* It uses flex-1 to take available space primarily, allowing SchemeImageDisplay to be pushed down if FAQ is very short */}
-          {/* OR, if FAQ has lots of content, its internal scroll will activate. */}
-          <div className="flex-1 overflow-hidden min-h-0 p-[0.5vh] rounded-md bg-white flex flex-col"> 
-            <FAQ /> {/* Ensure FAQ.js itself has appropriate max-height and overflow-y-auto if its content is long */}
-          </div>
 
-          {/* Scheme Image Container - Now below FAQ, with a defined height. */}
-          <div className="shrink-0 h-[25vh] sm:h-[28vh] rounded-md overflow-hidden bg-white"> {/* Adjust vh height as needed for your image */}
-             <SchemeImageDisplay 
-               imageName="SGM_Table.png" 
-               title="Deposits Structure" 
-               altText="Table detailing deposit structure and percentages" 
-             /> 
+        <div className="md:w-2/5 h-full flex flex-col space-y-[0.5vh] overflow-hidden p-[0.5vh]">
+          <div className="flex-1 overflow-hidden min-h-0 p-[0.5vh] rounded-md bg-white flex flex-col">
+            <FAQ />
+          </div>
+          <div className="shrink-0 h-[35vh] sm:h-[40vh] rounded-md overflow-hidden bg-white">
+             <SchemeImageDisplay
+               imageName="SGM_Table.png"
+               title="Deposits Structure"
+               altText="Table detailing deposit structure and percentages"
+             />
           </div>
         </div>
       </div>
-      
+
       <div className="text-center py-[0.5vh] md:py-[1vh] border-t border-gray-200 shrink-0 h-[7vh] flex items-center justify-center bg-white">
           <button
               onClick={fetchContractUIData}
-              disabled={isLoadingData} 
+              disabled={isLoadingData}
               className="px-[1.5vw] py-[0.75vh] text-[1.3vh] sm:text-[1.5vh] bg-gray-600 text-white rounded hover:bg-gray-700 disabled:bg-gray-300"
           >
               {isLoadingData ? "Refreshing..." : "Refresh Contract Data"}
