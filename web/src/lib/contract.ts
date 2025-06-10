@@ -98,10 +98,3 @@ export const GAMBLING_MACHINE_ABI = [
 		],
 	},
 ] as const;
-
-export const CONSTANTS = {
-	INITIAL_BALANCE: "1000000000000000000", // 1 ETH
-	MAX_ENTRIES: 100,
-	WINNER_BPS: 8000, // 80%
-	RANDOM_TOTAL_BPS: 1000, // 10%
-} as const;
