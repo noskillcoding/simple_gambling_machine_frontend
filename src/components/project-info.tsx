@@ -28,7 +28,7 @@ export function ProjectInfo() {
 								<p>
 									Read the full story in our{" "}
 									<a
-										href="#"
+										href="https://paragraph.com/@0xucs.eth/vibe-coding-simple-gambling-machine"
 										target="_blank"
 										rel="noopener noreferrer"
 										className="inline-flex items-center gap-1 text-blue-600 hover:underline"
@@ -40,7 +40,7 @@ export function ProjectInfo() {
 								<p className="text-muted-foreground text-sm">
 									<strong>Contributions welcome!</strong> Check out our{" "}
 									<a
-										href="https://github.com"
+										href="https://github.com/noskillcoding/simple_gambling_machine_frontend"
 										target="_blank"
 										rel="noopener noreferrer"
 										className="inline-flex items-center gap-1 text-blue-600 hover:underline"

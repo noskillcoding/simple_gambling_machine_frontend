@@ -91,7 +91,7 @@ export function SafetyInfo() {
 								<p>
 									The code is pretty simple though, you can find it on{" "}
 									<a
-										href="https://github.com"
+										href="https://github.com/noskillcoding/simple_gambling_machine"
 										target="_blank"
 										rel="noopener noreferrer"
 										className="inline-flex items-center gap-1 text-blue-600 hover:underline"

@@ -10,7 +10,7 @@ export function Footer() {
 						<ul className="space-y-2">
 							<li>
 								<a
-									href="https://github.com"
+									href="https://github.com/noskillcoding/simple_gambling_machine_frontend"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground"
@@ -20,7 +20,7 @@ export function Footer() {
 							</li>
 							<li>
 								<a
-									href="https://github.com"
+									href="https://github.com/noskillcoding/simple_gambling_machine"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground"
@@ -57,7 +57,7 @@ export function Footer() {
 						<ul className="space-y-2">
 							<li>
 								<a
-									href="#"
+									href="https://paragraph.com/@0xucs.eth/vibe-coding-simple-gambling-machine"
 									target="_blank"
 									rel="noopener noreferrer"
 									className="inline-flex items-center gap-1 text-muted-foreground text-sm hover:text-foreground"
